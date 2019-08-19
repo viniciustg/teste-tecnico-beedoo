@@ -1,0 +1,25 @@
+version: '3'
+services:
+  beedoo:
+    build: ./Dockerfiles/beedoo
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/var/www/beedoo
+    command:
+      - /entrypoints/beedoo/entrypoint.sh
+    ports:
+      - "8080:80"
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=secretpass
+      - MYSQL_DATABASE=beedoo_dev_test
+    volumes:
+      - .data:/var/lib/mysql
+  adminer:
+    image: adminer
+    ports:
+      - "9876:8080"

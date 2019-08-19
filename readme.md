@@ -8,6 +8,11 @@ Lembre-se, a aplicação para este teste está em codeigniter.
  $ php -S localhost:80
  ```
 
+## usando docker
+ ```
+ docker-compose up -d 
+ ```
+
 # Iniciando
  - Não existe usuario e senha, apenas clique em "login"
  - Na página inicial tem explicações de regras de negocio dessa aplicação

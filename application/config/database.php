@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'db',
 	'username' => 'root',
-	'password' => 'secret',
+	'password' => 'secretpass',
 	'database' => 'beedoo_dev_test',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
