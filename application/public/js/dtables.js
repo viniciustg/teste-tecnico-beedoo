@@ -11,7 +11,13 @@ function BeedooDatatable(id, url, identifier) {
     this.userSettings = [];
     this.$htmlTable = $(id);
     this.settings = {
-        columnDefs: []
+        columnDefs: [
+            {
+                targets: 2, render: function (data) {
+                    return moment(data).format('DD/MM/YYYY HH:MM');
+                }
+            }
+        ]
     };
 
     //Object to customize, adding functions to be executed before render Datatablles
@@ -27,8 +33,7 @@ function BeedooDatatable(id, url, identifier) {
     /**
      * Called as a constructor (on end of this method)
      */
-    this.init = function ()
-    {
+    this.init = function () {
         this.URL = url;
         this.__setIdentifier(identifier);
 
@@ -48,9 +53,8 @@ function BeedooDatatable(id, url, identifier) {
      * @param objName
      * @private
      */
-    this.__checkAndExecute = function (objName)
-    {
-        for(let idx in this[objName]){
+    this.__checkAndExecute = function (objName) {
+        for (let idx in this[objName]) {
             if (this[objName].hasOwnProperty(idx)) {
                 let func = this[objName][idx];
                 func(this);
@@ -67,21 +71,19 @@ function BeedooDatatable(id, url, identifier) {
         return this.URL;
     };
 
-    this.__initTable = function ()
-    {
+    this.__initTable = function () {
         this.$dtablesObject = this.$htmlTable.DataTable({
             ajax: {
                 type: "POST",
                 url: self.__getURL(),
                 // data: self.params.post
             },
-
             serverSide: true,
             processing: true,
             sDom: 'C<"clear">RZlfrtip',
-            bSort:true,
-            bPaginate:true,
-            sPaginationType:"simple_numbers",
+            bSort: true,
+            bPaginate: true,
+            sPaginationType: "simple_numbers",
             searchDelay: 1000,
             responsive: true,
             autoWidth: false,
@@ -117,8 +119,7 @@ function BeedooDatatable(id, url, identifier) {
      * This is called on render and on each column change, to save new order
      * @private
      */
-    this.__setColReorder = function ()
-    {
+    this.__setColReorder = function () {
         //Removed
     };
 
@@ -128,8 +129,7 @@ function BeedooDatatable(id, url, identifier) {
      * @param names array|string
      * @return array
      */
-    this.findColumnIdxByName = function (names)
-    {
+    this.findColumnIdxByName = function (names) {
         let parent = this;
         let itemsFound = [];
         let itemsError = [];
@@ -140,17 +140,13 @@ function BeedooDatatable(id, url, identifier) {
          * @see findMany
          * @param name
          */
-        function find(name)
-        {
+        function find(name) {
             let idxFound = false;
 
-            for (let idx in parent.cols)
-            {
-                if (parent.cols.hasOwnProperty(idx))
-                {
+            for (let idx in parent.cols) {
+                if (parent.cols.hasOwnProperty(idx)) {
                     let col = parent.cols[idx];
-                    if (col.data === name)
-                    {
+                    if (col.data === name) {
                         idxFound = true;
                         itemsFound.push(parseInt(idx));
                     }
@@ -159,7 +155,7 @@ function BeedooDatatable(id, url, identifier) {
 
             if (!idxFound) {
                 itemsError.push(name);
-                console.error("Column index for \""+name+"\" not found.");
+                console.error("Column index for \"" + name + "\" not found.");
             }
         }
 
@@ -167,10 +163,8 @@ function BeedooDatatable(id, url, identifier) {
          * Treat each name as unique find, using find() method.
          * @param names
          */
-        function findMany(names)
-        {
-            for(let nameIdx in names)
-            {
+        function findMany(names) {
+            for (let nameIdx in names) {
                 if (names.hasOwnProperty(nameIdx)) {
                     let name = names[nameIdx];
                     find(name);
@@ -178,8 +172,7 @@ function BeedooDatatable(id, url, identifier) {
             }
         }
 
-        switch (typeof names)
-        {
+        switch (typeof names) {
             case 'string':
                 find(names);
 
@@ -195,24 +188,21 @@ function BeedooDatatable(id, url, identifier) {
         }
 
         if (itemsError.length > 0) {
-            console.error("These columns weren't found:",itemsError);
+            console.error("These columns weren't found:", itemsError);
         }
 
         return itemsFound;
     };
 
-    this.__saveColReorder = function ()
-    {
+    this.__saveColReorder = function () {
         //removed
     };
 
-    this.__saveColResize = function ()
-    {
+    this.__saveColResize = function () {
         //removed
     };
 
-    this.__saveColVisibility = function ()
-    {
+    this.__saveColVisibility = function () {
         //removed
     };
 
@@ -224,8 +214,7 @@ function BeedooDatatable(id, url, identifier) {
      * @param info.colwidth
      * @private
      */
-    this.__setIdentifier = function (info)
-    {
+    this.__setIdentifier = function (info) {
         this.identifier = info;
     };
 
@@ -235,8 +224,7 @@ function BeedooDatatable(id, url, identifier) {
      * after this ajax result
      * @private
      */
-    this.__getUserSettings = function (callback)
-    {
+    this.__getUserSettings = function (callback) {
         //removed
         callback();
     };
@@ -245,12 +233,11 @@ function BeedooDatatable(id, url, identifier) {
      * Setup Datatable cols from HTML Element
      * @private
      */
-    this.__getTableCols = function ()
-    {
+    this.__getTableCols = function () {
         this.$htmlTable.find('thead tr th').each(function (i, column) {
             let columnID = i;
             let $column = $(column)
-            let data = {"data": $(column).data('id')};
+            let data = { "data": $(column).data('id') };
 
             $column.data('column-id', columnID);
 

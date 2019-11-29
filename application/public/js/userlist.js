@@ -10,4 +10,5 @@ userList = new UserList();
 
 $(document).ready(function () {
     userList.init();
+    
 });

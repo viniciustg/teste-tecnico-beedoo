@@ -43,14 +43,14 @@ class Users_model extends CI_Model {
         // Col names by alias, used to order by colName, not alias, because
         // doesn't work when this is a datetime column
         $orderable = [
-            'fullname' => 'name',
+            'fullname' => 'name',            
         ];
 
         $query = $this->db
-            ->select('SQL_CALC_FOUND_ROWS id, id, name as fullname, DATE_FORMAT(created_at, \'%d/%m/%Y %H:%i\') as treated_datetime', false)
+            ->select('SQL_CALC_FOUND_ROWS id, id, name as fullname, created_at as treated_datetime', false)
             ->from('users')
         ;
-
+        //DATE_FORMAT(created_at, \'%d/%m/%Y %H:%i\') as treated_datetime
         //Ao filtrar por "todos" no datatables, ele envia -1
         if ( $limit > 0 ) {
             $query

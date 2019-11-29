@@ -1,5 +1,5 @@
 <?php
-class Posts_model extends CI_Model {
+class Groups_model extends CI_Model {
 
     public function __construct()
     {
@@ -8,47 +8,33 @@ class Posts_model extends CI_Model {
 
     public function get_last_ten_entries()
     {
-        $query = $this->db->get('entries', 10);
-        return $query->result();
+        //
     }
 
     public function insert_entry()
     {
-        $this->title    = $_POST['title']; // please read the below note
-        $this->content  = $_POST['content'];
-        $this->date     = time();
-
-        $this->db->insert('entries', $this);
+        //
     }
 
     public function update_entry()
     {
-        $this->title    = $_POST['title'];
-        $this->content  = $_POST['content'];
-        $this->date     = time();
-
-        $this->db->update('entries', $this, array('id' => $_POST['id']));
+      //
     }
 
-    /**
-     * Get all purchase info about each product registered on the system
-     * such as Buyer, purchase datetime and etc.
-     */
+   
     public function getDatatablesList($limit = null, $offset = 0)
     {
         // Col names by alias, used to order by colName, not alias, because
         // doesn't work when this is a datetime column
-        $orderable = [
-            'fullname' => 'name',
-        ];
+        $orderable = [];
 
         $query = $this->db
             ->select('SQL_CALC_FOUND_ROWS id, 
                         id, 
-                        title, 
+                        name, 
                         created_at as treated_datetime,'
-                , false)                    
-            ->from('posts');
+                , false)                   
+            ->from('groups');
 
         //Ao filtrar por "todos" no datatables, ele envia -1
         if ( $limit > 0 ) {

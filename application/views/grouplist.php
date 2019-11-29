@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div class="container">
-    <h4 class="col-md-12 text-right" style="margin-top: 50px;">Listagem de Posts</h4>
+    <h4 class="col-md-12 text-right" style="margin-top: 50px;">Listagem de Grupos</h4>
 
     <div class="row" style="margin: 20px 0">
         <?php require_once 'partials/menu.php' ?>
@@ -17,8 +17,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <thead>
         <tr>
             <th data-id="id" data-width="40px">ID</th>
-            <th data-orderable="true" data-id="title">Título</th>
-            <th data-id="treated_datetime">Data de cadastro</th>
+            <th data-orderable="true" data-id="name">Nome</th>
+            <th data-id="treated_datetime">Data de Cadastro</th>
         </tr>
         </thead>
     </table>
@@ -31,5 +31,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/cr-1.4.1/fc-3.2.4/fh-3.1.3/kt-2.3.2/r-2.2.1/rg-1.0.2/rr-1.2.3/sc-1.4.4/sl-1.2.5/datatables.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.20/dataRender/datetime.js"></script>
 <script src="/application/public/js/dtables.js"></script>
-<script src="/application/public/js/postlist.js"></script>
+<script src="/application/public/js/grouplist.js"></script>
 </html>
